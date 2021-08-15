@@ -15,6 +15,8 @@ pip install libsniffpy
 
 ## Usage
 
+### Simple: Low level usage
+
 ```python
 
 from sniff import get_socket
@@ -22,8 +24,27 @@ from sniff import get_socket
 # You might have to adjust 
 s = get_socket("wlan0mon")
 # or whatever big number, forgot how big those frames are lel
-pkg = s.recv(3000)
-# do some parsing magic, out of scope for this package
+raw = s.recv(3000)
+
+```
+
+### Advanced: Iterate over the Radiotap frames
+
+```
+from sniff import get_socket, type_predicate, subtype_predicate, loop
+from sys import stderr
+from dpkt import ieee80211
+from dpkt.radiotap import Radiotap
+
+if __name__ == "__main__":
+    mgmt_predicate = type_predicate(ieee80211.MGMT_TYPE)
+    probe_request_predicate = subtype_predicate(ieee80211.M_PROBE_REQ)
+
+    mgmt_packets = filter(mgmt_predicate, loop("wlan0mon"))
+    probe_requests = filter(probe_request_predicate, mgmt_packets)
+    
+    for pkg in probe_requests:
+        print(pkg)
 ```
 
 ## Guidance for n00bs
