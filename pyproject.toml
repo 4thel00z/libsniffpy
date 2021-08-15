@@ -16,6 +16,7 @@ script = "build.py"
 [tool.poetry.dependencies]
 python = "^3.7"
 Cython = "^0.29.24"
+dpkt = "^1.9.6"
 
 [tool.poetry.dev-dependencies]
 

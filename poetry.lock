@@ -6,10 +6,18 @@ category = "main"
 optional = false
 python-versions = ">=2.6, !=3.0.*, !=3.1.*, !=3.2.*"
 
+[[package]]
+name = "dpkt"
+version = "1.9.6"
+description = "fast, simple packet creation / parsing, with definitions for the basic TCP/IP protocols"
+category = "main"
+optional = false
+python-versions = "*"
+
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "61ee900fff96f3fb731fdb5ef0a576c56ecef094d9aa312526f2b6ecd0a7d6b7"
+content-hash = "f6e7f87c360ed4b78118d535c8b8d1db3bc7b294fd4b8ee0f1950ec9208d94ed"
 
 [metadata.files]
 cython = [
@@ -52,4 +60,8 @@ cython = [
     {file = "Cython-0.29.24-cp39-cp39-win_amd64.whl", hash = "sha256:5fb977945a2111f6b64501fdf7ed0ec162cc502b84457fd648d6a558ea8de0d6"},
     {file = "Cython-0.29.24-py2.py3-none-any.whl", hash = "sha256:f96411f0120b5cae483923aaacd2872af8709be4b46522daedc32f051d778385"},
     {file = "Cython-0.29.24.tar.gz", hash = "sha256:cdf04d07c3600860e8c2ebaad4e8f52ac3feb212453c1764a49ac08c827e8443"},
+]
+dpkt = [
+    {file = "dpkt-1.9.6-py3-none-any.whl", hash = "sha256:b1739c594297b2b6321dfbf133e3f8dcf54c0ef54cb5739d204331d34a0d8fe4"},
+    {file = "dpkt-1.9.6.tar.gz", hash = "sha256:b5737010fd420d142e02ed04fa616edd1fc05e414980baef594f72287c875eef"},
 ]
