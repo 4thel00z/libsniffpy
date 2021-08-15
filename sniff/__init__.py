@@ -2,7 +2,7 @@ from libsniff import open_raw
 import ctypes
 import os
 import socket
-import sys
+from sys import stderr
 from ctypes.util import find_library
 from dpkt import ieee80211
 from dpkt.radiotap import Radiotap
@@ -72,7 +72,7 @@ def _from_fd(fd, keep_fd=True):
             return socket.socket(family, typ, proto, fileno=fd)
 
 
-def get_socket(iface: str) -> socket.socket:
+def get_socket(iface: str = "wlan0man") -> socket.socket:
     fd = open_raw(iface)
     return _from_fd(fd)
 
@@ -120,6 +120,7 @@ subtypes_data = {
     14: "qos-contention-free-poll-empty",
 }
 
+
 def type_predicate(type_id: int):
     def predicate(pkg: Radiotap) -> bool:
         return pkg.data.type == type_id
@@ -132,3 +133,15 @@ def subtype_predicate(type_id: int):
         return pkg.data.subtype == type_id
 
     return predicate
+
+
+def loop(iface: str = "wlan0man", size: int = 2034):
+    s = get_socket(iface)
+    try:
+        while True:
+            try:
+                yield Radiotap(s.recv(size))
+            except Exception as err:
+                print("[*] Could not decode a packet", err, file=stderr)
+    except KeyboardInterrupt:
+        print("[*] Closed the loop, through SIGINT", file=stderr)
