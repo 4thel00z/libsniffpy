@@ -1,5 +1,7 @@
 # libsniffpy
 
+![libsniff.png](https://raw.githubusercontent.com/4thel00z/logos/master/libsniff.png)
+
 ## Motivation
 
 I wanted to have a nice cython/python wrapper around [libsniff](https://github.com/4thel00z/libsniff).
