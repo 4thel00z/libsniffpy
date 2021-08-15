@@ -4,6 +4,8 @@ import os
 import socket
 import sys
 from ctypes.util import find_library
+from dpkt import ieee80211
+from dpkt.radiotap import Radiotap
 
 __all__ = ("fromfd",)
 
@@ -117,3 +119,16 @@ subtypes_data = {
     12: "qos-null",
     14: "qos-contention-free-poll-empty",
 }
+
+def type_predicate(type_id: int):
+    def predicate(pkg: Radiotap) -> bool:
+        return pkg.data.type == type_id
+
+    return predicate
+
+
+def subtype_predicate(type_id: int):
+    def predicate(pkg: Radiotap) -> bool:
+        return pkg.data.subtype == type_id
+
+    return predicate
