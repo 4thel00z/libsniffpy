@@ -30,7 +30,7 @@ raw = s.recv(3000)
 
 ### Advanced: Iterate over the Radiotap frames
 
-```
+```python
 from sniff import get_socket, type_predicate, subtype_predicate, loop
 from sys import stderr
 from dpkt import ieee80211
